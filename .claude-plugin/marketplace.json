@@ -1,0 +1,22 @@
+{
+  "name": "frontierstack",
+  "owner": {
+    "name": "Enfour, Inc.",
+    "url": "https://www.frontierstack.app"
+  },
+  "description": "FrontierStack's agent kit: skills and a local MCP connection to the FrontierStack macOS app. FrontierStack is made by Enfour, Inc. — https://www.frontierstack.app",
+  "plugins": [
+    {
+      "name": "frontierstack",
+      "source": "./",
+      "description": "Check and safely operate the Macs, servers, DNS, certificates and routers you manage with FrontierStack. Needs the FrontierStack app on the same Mac. FrontierStack is made by Enfour, Inc. — https://www.frontierstack.app",
+      "version": "1.0.0",
+      "author": {
+        "name": "Enfour, Inc.",
+        "url": "https://www.frontierstack.app"
+      },
+      "homepage": "https://www.frontierstack.app/agents/",
+      "license": "MIT"
+    }
+  ]
+}

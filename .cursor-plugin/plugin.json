@@ -1,0 +1,30 @@
+{
+  "name": "frontierstack",
+  "description": "Check and safely operate the Macs, servers, DNS, certificates and routers you manage with the FrontierStack macOS app. Read-only by default; credentials never leave your Mac. FrontierStack is made by Enfour, Inc. — https://www.frontierstack.app",
+  "version": "1.0.0",
+  "author": {
+    "name": "Enfour, Inc."
+  },
+  "homepage": "https://www.frontierstack.app/agents/",
+  "repository": "https://github.com/richardnorthcott/frontierstack-agent-kit",
+  "license": "MIT",
+  "keywords": [
+    "server administration",
+    "network",
+    "devops",
+    "monitoring",
+    "macos",
+    "mcp",
+    "dns",
+    "tls"
+  ],
+  "logo": "assets/icon-512.png",
+  "skills": "./skills/",
+  "mcpServers": {
+    "frontierstack": {
+      "type": "stdio",
+      "command": "${userHome}/Library/Application Support/FrontierStack/mcp-bridge",
+      "args": []
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "app.frontierstack/frontierstack",
+  "title": "FrontierStack by Enfour, Inc.",
+  "description": "Enfour, Inc. FrontierStack (www.frontierstack.app): Mac and server health, logs, restarts.",
+  "version": "1.0.0",
+  "websiteUrl": "https://www.frontierstack.app/agents/",
+  "repository": {
+    "url": "https://github.com/richardnorthcott/frontierstack-agent-kit",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://www.frontierstack.app/assets/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://frontierstack.app/plugin/mcp"
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "publisher": "Enfour, Inc.",
+      "website": "https://www.frontierstack.app",
+      "support": "https://www.frontierstack.app/support.html"
+    }
+  }
+}

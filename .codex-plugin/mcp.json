@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "frontierstack": {
+      "type": "stdio",
+      "command": "sh",
+      "args": [
+        "-c",
+        "exec \"$HOME/Library/Application Support/FrontierStack/mcp-bridge\""
+      ]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "frontierstack",
+  "version": "1.0.0",
+  "description": "Let Codex check and safely operate the Macs and servers you manage with FrontierStack, through the local FrontierStack bridge on this Mac. FrontierStack is made by Enfour, Inc. — https://www.frontierstack.app",
+  "author": {
+    "name": "Enfour, Inc.",
+    "url": "https://www.frontierstack.app"
+  },
+  "homepage": "https://www.frontierstack.app/agents/",
+  "repository": "https://github.com/richardnorthcott/frontierstack-agent-kit",
+  "license": "MIT",
+  "skills": "./skills/",
+  "mcpServers": "./.codex-plugin/mcp.json",
+  "interface": {
+    "displayName": "FrontierStack",
+    "shortDescription": "Check and operate your FrontierStack Macs and servers.",
+    "longDescription": "Connect Codex to the FrontierStack app on this Mac. Check health, your fleet, alert delivery problems, certificates, DNS and routers, run read-only diagnostics and read secret-redacted logs, and request bounded changes such as restarting a web service. FrontierStack keeps your credentials, applies its App Lock, permissions and approvals, and records an audit log. Changes stay off until you allow them on the Mac. FrontierStack is made by Enfour, Inc. — https://www.frontierstack.app",
+    "developerName": "Enfour, Inc.",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://www.frontierstack.app/agents/",
+    "privacyPolicyURL": "https://www.frontierstack.app/plugin/privacy.html",
+    "termsOfServiceURL": "https://www.frontierstack.app/terms.html",
+    "logo": "./assets/icon-512.png",
+    "defaultPrompt": [
+      "Show the health of my FrontierStack systems.",
+      "Why is my website slow? Check the server and its logs.",
+      "Are any certificates or domains about to expire?"
+    ],
+    "brandColor": "#4ea1ff",
+    "composerIcon": "./assets/icon-512.png"
+  },
+  "keywords": [
+    "server administration",
+    "network",
+    "devops",
+    "monitoring",
+    "macOS",
+    "MCP",
+    "DNS",
+    "TLS"
+  ]
+}

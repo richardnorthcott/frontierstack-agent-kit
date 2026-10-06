@@ -1,0 +1,15 @@
+{
+  "name": "frontierstack",
+  "version": "1.0.0",
+  "description": "Check and safely operate the Macs, servers, DNS, certificates and routers you manage with the FrontierStack macOS app. Read-only by default; credentials stay on your Mac. FrontierStack is made by Enfour, Inc. — https://www.frontierstack.app",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "frontierstack": {
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "exec \"$HOME/Library/Application Support/FrontierStack/mcp-bridge\""
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "skills": [
+    {
+      "name": "frontierstack",
+      "description": "Observe and safely operate the Macs, Linux and Windows servers, services, containers, websites, DNS, TLS certificates, routers and devices that the FrontierStack app (www.frontierstack.app, by Enfour, Inc.) manages. Use when the user wants server or service health, logs, diagnostics (ping, dig, curl), certificate or domain expiry, fleet context, or to restart a service such as Apache, Nginx or MySQL. Connects to the FrontierStack macOS app over MCP or its `frontierstack` CLI. Read-only by default; changes are approved on the Mac.",
+      "files": [
+        "SKILL.md",
+        "reference/capabilities.md"
+      ]
+    },
+    {
+      "name": "frontierstack-network-admin",
+      "description": "Act as the Network Administrator for an agent team by driving FrontierStack (www.frontierstack.app, by Enfour, Inc.), the macOS app that owns the network. Use for DNS records and zone delegation, TLS/ACME certificates and expiry, routers and firewall policy, VPN and overlay networks (Tailscale, ZeroTier), tunnels and remote exposure, device discovery, SNMP/PoE/UPS, and diagnosing why a site or host is unreachable. Read-only by default; every change passes FrontierStack's App Lock, approval and audit. Connects over MCP. The agent never receives network credentials.",
+      "files": [
+        "SKILL.md",
+        "reference/network-operations.md",
+        "reference/role-profile.json"
+      ]
+    }
+  ]
+}
