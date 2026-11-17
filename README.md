@@ -69,15 +69,16 @@ changes.
 
 ### Claude Code
 
-Plugin (skills, the local server and the cloud connector together), from the Claude plugin
-directory on claude.ai (Customize ▸ Plugins) once it is listed, or straight from its repository:
+Plugin (the skills and the cloud connector), from the Claude plugin directory on claude.ai
+(Customize ▸ Plugins) once it is listed, or straight from its repository:
 
 ```
 /plugin marketplace add richardnorthcott/frontierstack-claude-plugin
 /plugin install frontierstack@frontierstack
 ```
 
-Or add only the MCP server (the app's MCP Server pane shows this command):
+For the app's full tool catalog over a connection that stays on the Mac, add the local MCP server
+too (the app's MCP Server pane has an Add to Claude Code button that runs this):
 
 ```
 claude mcp add frontierstack -- "$HOME/Library/Application Support/FrontierStack/mcp-bridge"
