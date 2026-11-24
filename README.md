@@ -1,5 +1,7 @@
 # FrontierStack Agent Kit
 
+[![FrontierStack MCP connector](https://glama.ai/mcp/connectors/app.frontierstack/frontierstack/badges/score.svg)](https://glama.ai/mcp/connectors/app.frontierstack/frontierstack)
+
 Skills, plugin manifests and setup notes for connecting AI agents (Claude, Codex, Cursor,
 Gemini, Grok, Hermes, OpenClaw, Amp, Paperclip and any MCP client) to **FrontierStack**.
 
