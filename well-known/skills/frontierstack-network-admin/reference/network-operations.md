@@ -36,7 +36,7 @@ syntax is unforgiving and a malformed SPF record can fail closed.
 ## TLS certificates
 
 ### Routine expiry watch
-`cert_expiry_check` across sites. Anything under 14 days is actionable; under 7 is urgent.
+`get_server_health` with `area: "websites"` lists each monitored site's certificate expiry. Anything under 14 days is actionable; under 7 is urgent.
 Report the chain, not just the leaf — an expired intermediate breaks a leaf that looks fine.
 
 ### Issuing / renewing
@@ -98,8 +98,7 @@ Watch key expiry: an expiring node key silently removes access at a time nobody 
 ## Tunnels and temporary exposure
 
 `tunnel` and `debug_share` expose a local service outward. Both take an `action`
-(`create`/`list`/`delete`, `open`/`list`/`close`); the older `tunnel_create`,
-`tunnel_delete` and `debug_share_close` names still dispatch to them.
+(`create`/`list`/`delete`, `open`/`list`/`close`).
 `debug_share` also has `serve`/`stop`: `serve` runs a project folder as a localhost dev
 server and replies with its host and port, and — only with `"tailscale": true` — this Mac's
 Tailscale URL on the same port (tailnet peers only, never the LAN). Pass those addresses on

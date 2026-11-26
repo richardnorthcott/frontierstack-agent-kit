@@ -78,7 +78,6 @@
       "diagnose_zone",
       "device_dns",
       "serving_path_diagnosis",
-      "cert_expiry_check",
       "firewall_policies",
       "router_info",
       "zerotier_controller",

@@ -107,10 +107,17 @@ not answering; 78 means the CLI is not configured.
 `https://frontierstack.app/plugin/mcp` is a hosted MCP endpoint (streamable HTTP, OAuth 2.1
 sign-in with a FrontierStack customer account). It reaches the user's Macs that have
 **MCP Server ▸ ChatGPT access** turned on while FrontierStack is running there; that one switch
-serves every cloud assistant, not only ChatGPT. It carries seven tools:
+serves every cloud assistant, not only ChatGPT. It carries eight tools:
 `list_frontierstack_macs`, `get_server_health`, `get_fleet_context`, `get_alert_errors`,
-`diagnose`, `read_logs` and `service_action`. Call `list_frontierstack_macs` first when the user
-has not named a Mac.
+`diagnose`, `read_logs`, `service_action` and `replace_credential`. Call
+`list_frontierstack_macs` first when the user has not named a Mac.
+
+**Code Mode** is the same server with three tools: `https://frontierstack.app/plugin/mcp/code`
+remotely, or `http://127.0.0.1:<port>/mcp/code` on a Mac with FrontierStack 2.34 or later. Call
+`search` with the task to get TypeScript declarations, then `execute` with a short JavaScript
+program (the body of an async function) that calls `await frontierstack.<name>(args)` and returns
+only what matters. Scripts can only read; make a change with `frontierstack_call` and the exact
+tool name, and it gets its usual approval.
 
 Use it where the local bridge can't run, such as a web or mobile chat or an agent on another
 machine. When both are connected, prefer the local bridge: it has the full tool catalog.

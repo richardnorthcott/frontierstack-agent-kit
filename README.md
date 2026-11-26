@@ -51,9 +51,18 @@ environment variable, masked in the output).
 
 **2. Remote (live).** `https://frontierstack.app/plugin/mcp` is a
 streamable-HTTP MCP endpoint with OAuth 2.1 sign-in using a FrontierStack customer account. It
-relays seven tools to your Macs where **ChatGPT access** is turned on: `list_frontierstack_macs`,
-`get_server_health`, `get_fleet_context`, `get_alert_errors`, `diagnose`, `read_logs` and
-`service_action`. Cloud agents that cannot reach your Mac will use this.
+relays eight tools to your Macs where **ChatGPT access** is turned on: `list_frontierstack_macs`,
+`get_server_health`, `get_fleet_context`, `get_alert_errors`, `diagnose`, `read_logs`,
+`service_action` and `replace_credential` (the owner types the new value on a secure FrontierStack
+page; it never passes through the assistant). Cloud agents that cannot reach your Mac will use this.
+
+**Code Mode.** The same connector at `https://frontierstack.app/plugin/mcp/code` offers three
+tools instead of many: `search` returns TypeScript declarations for the FrontierStack functions
+that match a task, `execute` runs a short read-only JavaScript program on the Mac and returns only
+its result (so an agent can check several things in one step), and `frontierstack_call` runs one
+tool, including a change, by name with its usual approval. On a Mac, FrontierStack 2.34 and later
+serve the same at `http://127.0.0.1:<port>/mcp/code` (MCP Server ▸ Code Mode URL). The standard
+endpoints are unchanged.
 
 ## Setup by platform
 

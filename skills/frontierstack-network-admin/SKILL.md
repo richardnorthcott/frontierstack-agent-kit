@@ -165,7 +165,7 @@ Verified against the shipped harness. **Read** tools work whenever the app is un
 | `diagnose_zone` | Whole-zone DNS delegation, nameservers, propagation |
 | `device_dns` | What resolver a device is actually using |
 | `serving_path_diagnosis` | Full request path when a site is wrong or unreachable |
-| `cert_expiry_check` | TLS expiry across sites |
+| `get_server_health` with `area: "websites"` | TLS expiry across monitored sites |
 | `firewall_policies` | Read current firewall rules before proposing a change |
 | `router_info` | Live router health, gateways, IDS alerts, brute-force spikes, reboots |
 | `zerotier_controller` | Overlay network members and routes |
