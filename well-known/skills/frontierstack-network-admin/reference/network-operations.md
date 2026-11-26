@@ -36,7 +36,7 @@ syntax is unforgiving and a malformed SPF record can fail closed.
 ## TLS certificates
 
 ### Routine expiry watch
-`get_server_health` with `area: "websites"` lists each monitored site's certificate expiry. Anything under 14 days is actionable; under 7 is urgent.
+`cert_expiry_check` across sites. Anything under 14 days is actionable; under 7 is urgent.
 Report the chain, not just the leaf — an expired intermediate breaks a leaf that looks fine.
 
 ### Issuing / renewing

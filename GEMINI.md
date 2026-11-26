@@ -18,7 +18,7 @@ connect, tell the user to open FrontierStack and turn on MCP Server; do not prob
 4. Search again only when the task moves to another subsystem.
 
 Start with reads: `get_server_health`, `diagnose` (ping, dig, curl, traceroute), `tail_log`,
-`router_info`, and `get_server_health` with `area: "websites"` for certificate expiry. Establish what is broken from evidence before proposing a
+`cert_expiry_check`, `router_info`. Establish what is broken from evidence before proposing a
 change.
 
 ## Rules
