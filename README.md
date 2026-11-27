@@ -33,7 +33,7 @@ contains only the agent kit: skills, manifests and documentation, under the MIT 
 ## How agents connect
 
 **1. Local (works today).** When you turn on **MCP Server** in FrontierStack, or press any
-**Add to …** button under **MCP Server ▸ AI clients**, the app writes an owner-only stdio MCP
+**Add to …** button under **MCP & Agents ▸ AI clients**, the app writes an owner-only stdio MCP
 bridge to:
 
 ```
@@ -61,12 +61,12 @@ tools instead of many: `search` returns TypeScript declarations for the Frontier
 that match a task, `execute` runs a short read-only JavaScript program on the Mac and returns only
 its result (so an agent can check several things in one step), and `frontierstack_call` runs one
 tool, including a change, by name with its usual approval. On a Mac, FrontierStack 2.34 and later
-serve the same at `http://127.0.0.1:<port>/mcp/code` (MCP Server ▸ Code Mode URL). The standard
+serve the same at `http://127.0.0.1:<port>/mcp/code` (MCP & Agents ▸ Code Mode URL). The standard
 endpoints are unchanged.
 
 ## Setup by platform
 
-For most clients the easiest route is **FrontierStack ▸ MCP Server ▸ AI clients**: it detects
+For most clients the easiest route is **FrontierStack ▸ MCP & Agents ▸ AI clients**: it detects
 installed clients and writes their config for you (**Set Up Detected**, or one client's
 **Add to …** button). The manual steps below do the same thing. Configure each client only one
 way: installing a plugin *and* adding the server by hand gives two `frontierstack` entries.
@@ -89,7 +89,7 @@ Plugin (the skills and the cloud connector), from the Claude plugin directory on
 ```
 
 For the app's full tool catalog over a connection that stays on the Mac, add the local MCP server
-too (the app's MCP Server pane has an Add to Claude Code button that runs this):
+too (the app's MCP & Agents pane has an Add to Claude Code button that runs this):
 
 ```
 claude mcp add frontierstack -- "$HOME/Library/Application Support/FrontierStack/mcp-bridge"
@@ -129,7 +129,7 @@ with the same local server.
 
 ### ChatGPT
 
-ChatGPT connects through the remote endpoint. Turn on **MCP Server ▸ ChatGPT access** on each Mac
+ChatGPT connects through the remote endpoint. Turn on **MCP & Agents ▸ ChatGPT access** on each Mac
 it may reach (the app must be running), then add FrontierStack in ChatGPT: from the app directory
 once the listing is approved, or today as a custom connector with the URL
 `https://frontierstack.app/plugin/mcp`. Sign in with your FrontierStack account when asked.

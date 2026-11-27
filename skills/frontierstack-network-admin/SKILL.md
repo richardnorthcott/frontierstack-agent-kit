@@ -109,7 +109,7 @@ One of these must be true before any tool call will work:
 
 1. **Local worker on the same machine** — connect through the generated Keychain-backed
    bridge at `$HOME/Library/Application Support/FrontierStack/mcp-bridge`. In FrontierStack:
-   **MCP Server ▸ AI clients** has an **Add to …** button per client (Claude Code, Codex,
+   **MCP & Agents ▸ AI clients** has an **Add to …** button per client (Claude Code, Codex,
    Cursor, Gemini CLI, Grok, Hermes, OpenClaw, Amp, …), or run your client's own command, for
    example `grok mcp add frontierstack -- "$HOME/Library/Application Support/FrontierStack/mcp-bridge"`.
    The bridge reads the credential from the Keychain at call time; it is never written into a

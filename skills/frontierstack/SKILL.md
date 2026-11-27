@@ -59,7 +59,7 @@ bring a human to the right screen.
 ### 1. MCP through the local bridge (recommended)
 
 The user turns on **FrontierStack ▸ MCP Server** (or presses an **Add to …** button under
-**MCP Server ▸ AI clients**, which writes the client's config for them). The app then writes an
+**MCP & Agents ▸ AI clients**, which writes the client's config for them). The app then writes an
 owner-only stdio bridge at:
 
 ```
@@ -88,7 +88,7 @@ the catalog; do not load all of it for routine work.
 
 ### 2. `frontierstack` CLI
 
-Installed from the app (MCP Server pane, or Remote Control & Lock ▸ Command Line). It reads its
+Installed from the app (MCP & Agents pane, or Remote Control & Lock ▸ Command Line). It reads its
 credential from the Keychain at run time and starts the app hidden when needed.
 
 ```
@@ -106,7 +106,7 @@ not answering; 78 means the CLI is not configured.
 
 `https://frontierstack.app/plugin/mcp` is a hosted MCP endpoint (streamable HTTP, OAuth 2.1
 sign-in with a FrontierStack customer account). It reaches the user's Macs that have
-**MCP Server ▸ ChatGPT access** turned on while FrontierStack is running there; that one switch
+**MCP & Agents ▸ ChatGPT access** turned on while FrontierStack is running there; that one switch
 serves every cloud assistant, not only ChatGPT. It carries eight tools:
 `list_frontierstack_macs`, `get_server_health`, `get_fleet_context`, `get_alert_errors`,
 `diagnose`, `read_logs`, `service_action` and `replace_credential`. Call

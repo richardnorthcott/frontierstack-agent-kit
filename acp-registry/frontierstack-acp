@@ -1,0 +1,104 @@
+#!/bin/sh
+# FrontierStack ACP launcher — what the ACP Registry entry `frontierstack` downloads and runs.
+#
+# FrontierStack is a Mac app; its ACP agent is the `frontierstack-core` helper inside it. This
+# launcher finds the installed app and hands stdin/stdout to that helper:
+#
+#   frontierstack-core acp --editor auto
+#
+# (`auto` names the editor — T3 Code, Zed, … — from the client's ACP handshake, so approvals in
+# FrontierStack say where a request came from.)
+#
+# When FrontierStack isn't installed, or is older than LAUNCHER_MIN_APP, the launcher answers ACP
+# itself, just enough for an editor to explain what's missing: `initialize` advertises one auth
+# method, "Install FrontierStack", which opens the download page; every session request returns
+# ACP `auth_required` with the reason. It never reads or sends anything else.
+#
+# Holds no credentials and talks to no network service of its own.
+set -u
+
+LAUNCHER_VERSION="1.0.0"
+LAUNCHER_MIN_APP="2.35"        # first FrontierStack with `acp --editor auto`
+BUNDLE_ID="jp.co.enfour.frontierstack"
+HELPER="Contents/Helpers/FrontierStackCLI.app/Contents/MacOS/frontierstack-core"
+DOWNLOAD_URL="https://frontierstack.app/download.html"
+
+# --- find the app ---------------------------------------------------------------------------
+find_app() {
+    # FRONTIERSTACK_APP_PATH: for testing only (point it at a missing path to exercise the stub).
+    if [ -n "${FRONTIERSTACK_APP_PATH:-}" ]; then
+        printf '%s\n' "$FRONTIERSTACK_APP_PATH"
+        return
+    fi
+    for candidate in "/Applications/FrontierStack.app" "${HOME:-}/Applications/FrontierStack.app"; do
+        if [ -x "$candidate/$HELPER" ]; then
+            printf '%s\n' "$candidate"
+            return
+        fi
+    done
+    if command -v mdfind >/dev/null 2>&1; then
+        mdfind "kMDItemCFBundleIdentifier == '$BUNDLE_ID'" 2>/dev/null | while IFS= read -r found; do
+            if [ -x "$found/$HELPER" ]; then printf '%s\n' "$found"; break; fi
+        done
+    fi
+}
+
+# major.minor comparison: succeeds when $1 >= $2.
+version_at_least() {
+    awk -v have="$1" -v need="$2" 'BEGIN {
+        split(have, h, "."); split(need, n, ".")
+        for (i = 1; i <= 3; i++) { hv = h[i] + 0; nv = n[i] + 0
+            if (hv > nv) exit 0; if (hv < nv) exit 1 }
+        exit 0 }'
+}
+
+APP="$(find_app)"
+REASON=""
+if [ -z "$APP" ] || [ ! -x "$APP/$HELPER" ]; then
+    REASON="FrontierStack isn't installed on this Mac. It is a Mac app: install it from frontierstack.app, then turn on “Answer in editor agent panels” in its MCP & Agents pane."
+else
+    APP_VERSION="$(/usr/bin/defaults read "$APP/Contents/Info" CFBundleShortVersionString 2>/dev/null || echo 0)"
+    if version_at_least "$APP_VERSION" "$LAUNCHER_MIN_APP"; then
+        exec "$APP/$HELPER" acp --editor auto
+    fi
+    REASON="This FrontierStack ($APP_VERSION) is too old for editor agents. Update it to $LAUNCHER_MIN_APP or later, then turn on “Answer in editor agent panels” in its MCP & Agents pane."
+fi
+
+# --- minimal ACP responder (no FrontierStack) -----------------------------------------------
+# Line-delimited JSON-RPC 2.0. Only `initialize` succeeds; `authenticate` opens the download page;
+# every other request is answered with an error. Notifications and responses are ignored.
+
+json_escape() { printf '%s' "$1" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g'; }
+MESSAGE="$(json_escape "$REASON")"
+
+field_id() {
+    # The request id (number or string), leftmost "id" key.
+    printf '%s' "$1" | awk '{ if (match($0, /"id"[ \t]*:[ \t]*(-?[0-9]+|"[^"]*")/)) {
+        s = substr($0, RSTART, RLENGTH); sub(/^"id"[ \t]*:[ \t]*/, "", s); print s } }'
+}
+field_method() {
+    printf '%s' "$1" | awk '{ if (match($0, /"method"[ \t]*:[ \t]*"[^"]*"/)) {
+        s = substr($0, RSTART, RLENGTH); sub(/^"method"[ \t]*:[ \t]*"/, "", s); sub(/"$/, "", s); print s } }'
+}
+
+while IFS= read -r line || [ -n "$line" ]; do
+    method="$(field_method "$line")"
+    [ -n "$method" ] || continue                  # a response to us: nothing to do
+    id="$(field_id "$line")"
+    [ -n "$id" ] || continue                      # a notification (e.g. session/cancel)
+    case "$method" in
+        initialize)
+            printf '{"jsonrpc":"2.0","id":%s,"result":{"protocolVersion":1,"agentCapabilities":{"loadSession":false,"promptCapabilities":{"image":false,"audio":false,"embeddedContext":false}},"agentInfo":{"name":"frontierstack","title":"FrontierStack","version":"%s"},"authMethods":[{"id":"install-frontierstack","name":"Install FrontierStack","description":"FrontierStack is a Mac app. Opens its download page; after installing, turn on “Answer in editor agent panels” in its MCP & Agents pane.","type":"agent"}]}}\n' "$id" "$LAUNCHER_VERSION"
+            ;;
+        authenticate)
+            if command -v open >/dev/null 2>&1; then open "$DOWNLOAD_URL" >/dev/null 2>&1 || true; fi
+            printf '{"jsonrpc":"2.0","id":%s,"error":{"code":-32000,"message":"%s"}}\n' "$id" "$MESSAGE"
+            ;;
+        session/new|session/load|session/resume|session/prompt)
+            printf '{"jsonrpc":"2.0","id":%s,"error":{"code":-32000,"message":"%s"}}\n' "$id" "$MESSAGE"
+            ;;
+        *)
+            printf '{"jsonrpc":"2.0","id":%s,"error":{"code":-32601,"message":"%s is not supported"}}\n' "$id" "$(json_escape "$method")"
+            ;;
+    esac
+done
